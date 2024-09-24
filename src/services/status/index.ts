@@ -2,7 +2,6 @@ import { MSEC_IN_SEC } from "../../constants";
 import { CpuInfo, cpus, freemem, totalmem } from 'os';
 
 class StatusService {
-    #cpuCount = cpus().length;
     #interpolateMsec: number = 1000;
     #checkPeriodMsec: number = 100; 
     #loopTimeout = setTimeout(this.#getStats.bind(this), this.#checkPeriodMsec);
@@ -49,7 +48,8 @@ class StatusService {
 
         if (this.#ramMeasurements.length > this.#interpolateMsec / this.#checkPeriodMsec) this.#ramMeasurements.shift()
         this.#ramMeasurements.push(freemem());
-        this.#loopTimeout.refresh();
+        this.#loopTimeout.unref();
+        this.#loopTimeout = setTimeout(this.#getStats.bind(this), this.#checkPeriodMsec);
     }
 
     get status (): { cpu: number, ram: number} {
