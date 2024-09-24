@@ -1,16 +1,15 @@
-import { ML_MODEL } from '../../config';
+import { ML_CACHE_DIR, ML_MODEL } from '../../config';
 
 interface SentimentOutput {
     label: string,
     score: number
-}
-
-class AIService {
+}class AIService {
     #pipeline?: Function
 
     async #getPipeline(){
         if (!this.#pipeline) {
-            const { pipeline }: { pipeline: Function} = await import('@xenova/transformers');
+            const { pipeline, env }: { pipeline: Function, env: { cacheDir: string }} = await import('@xenova/transformers');
+            env.cacheDir = ML_CACHE_DIR;
             this.#pipeline = await pipeline('sentiment-analysis', ML_MODEL);
         }
         return this.#pipeline;

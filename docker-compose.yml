@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  tonealyzer:
+    container_name: tonealyzer
+    build:
+      context: .
+    ports:
+      - 3000:${APP_LISTEN_PORT:-3000}
+    volumes:
+      - ~/tonealyzer_h/logs:/app/${APP_LOG_DIR:-logs}
+      - ~/tonealyzer_h/modelcache:/app/${APP_MODEL_CACHE_DIR:-model_cache}

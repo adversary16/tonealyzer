@@ -1,3 +1,4 @@
+import { LISTEN_PORT } from "./config";
 import { run } from "./controllers";
 
-run(3000)
+run(LISTEN_PORT)
