@@ -15,6 +15,7 @@ interface SentimentOutput {
         return this.#pipeline;
     }
     public async analyze(text: string|string[]) {
+        if (!text) throw new Error('No text provided');
         const pipe = await this.#getPipeline();
         if (!pipe) throw new Error('No pipeline is available');
         const output: SentimentOutput[] = await pipe(text);
