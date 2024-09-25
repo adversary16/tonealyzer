@@ -1,9 +1,10 @@
 import { expect, test } from 'vitest'
 import { aiService } from ".";
 
-test('ai pipeline', async() => {
+test('ai pipeline', () => {
     const SOMETHING_POSITIVE = 'kittens, puppies and beautiful motorcycles';
     const SOMETHING_NEGATIVE = 'hangover, homework and empty wallet';
-    expect(await aiService.analyze(SOMETHING_POSITIVE)).toBe('POSITIVE');
-    expect(await aiService.analyze(SOMETHING_NEGATIVE)).toBe('NEGATIVE');
+    expect(aiService.analyze(SOMETHING_POSITIVE)).resolves.toBe('POSITIVE');
+    expect(aiService.analyze(SOMETHING_NEGATIVE)).resolves.toBe('NEGATIVE');
+    expect(async () => aiService.analyze()).rejects.toThrowError();
 })
