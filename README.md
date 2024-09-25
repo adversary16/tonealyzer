@@ -14,7 +14,7 @@ It exposes two endpoints:
    `npm i && npm run start` will install all the dependencies and launch this service on the host machine. By default, service responds on port **3000**
 
 2. Docker
-   `docker build . -t tonealyzer && docker run -p 3000:3000 -n tonealyzer` will start item containerized. Use dedicated volumes for `app/log` and `app/model_cache` to keep them persistent and externally accessible.
+   `docker build . -t tonealyzer && docker run -p 3000:3000 -n tonealyzer tonealyzer` will start item containerized. Use dedicated volumes for `app/log` and `app/model_cache` to keep them persistent and externally accessible.
 
 3. Docker-compose
    `docker-compose up -d` will bring the project up. Logs and ml cache will reside in `$HOME/tonealyzer/logs` and `$HOME/tonealyzer/model_cache`, respectively.

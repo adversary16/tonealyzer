@@ -1,0 +1,12 @@
+name: Build and deploy Tonealyzer container
+run-name: Build and deploy on ${{ github.actor }}
+on: [push]
+jobs:
+  build_containter:
+    runs-on: base
+    env:
+      APP_ML_MODEL: Xenova/distilbert-base-uncased-finetuned-sst-2-english
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - run: $([ -z $(which docker-compose) ] && echo "docker compose" || echo "docker-compose") up -d --force-recreate

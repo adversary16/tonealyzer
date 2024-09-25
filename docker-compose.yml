@@ -3,6 +3,7 @@ version: '3.8'
 services:
   tonealyzer:
     container_name: tonealyzer
+    restart: always
     build:
       context: .
     ports:
